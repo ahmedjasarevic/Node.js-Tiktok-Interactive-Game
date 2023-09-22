@@ -1,0 +1,41 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "lockfileVersion": 2,
+  "requires": true,
+  "packages": {
+    "..": {
+      "version": "1.0.3",
+      "funding": [
+        {
+          "type": "Ko-fi",
+          "url": "https://ko-fi.com/zerody"
+        },
+        {
+          "type": "Patreon",
+          "url": "https://www.patreon.com/zerody"
+        }
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "axios": "^0.25.0",
+        "protobufjs": "^6.11.2",
+        "websocket": "^1.0.34"
+      },
+      "devDependencies": {
+        "@babel/cli": "^7.17.0",
+        "@babel/core": "^7.17.2",
+        "@babel/preset-env": "^7.16.11",
+        "prettier": "2.5.1",
+        "typescript": "^4.8.2"
+      },
+      "engines": {
+        "node": ">=10.0.0"
+      }
+    },
+    "node_modules/tiktok-live-connector": {
+      "resolved": "..",
+      "link": true
+    }
+  }
+}
