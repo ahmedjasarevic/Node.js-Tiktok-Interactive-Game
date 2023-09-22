@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronaldo's and Messi's Health Progress</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #121212; /* Dark background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .football-pitch {
+            background-image: url('football.jpg'); /* Replace with your football pitch image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* Add spacing between player containers */
+        }
+
+        .player {
+            position: relative;
+            width: 200px; /* Increase player image size */
+            height: 350px; /* Increase player image size */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-right: 20px;
+            border: 3px solid #fff; /* White border around player images */
+            border-radius: 8px; /* Rounded corners for player images */
+        }
+
+        .popup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            color: white;
+            font-size: 24px;
+            z-index: 2;
+            animation: fadeInOut 3s linear;
+            border-radius: 8px; /* Rounded corners for pop-up */
+        }
+
+        .health-bar {
+            background-color: #333;
+            border: 2px solid white;
+            height: 20px;
+            width: 150px;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            margin-right: 20px; /* Add spacing between health bars */
+        }
+
+        .health-fill {
+            height: 100%;
+            background-color: #00bcd4; /* Blue health bar */
+            border-radius: 8px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        #healthValue, #healthValue2 {
+            color: white;
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        /* Customize the health bar colors for each player */
+        #healthFill {
+            background-color: #e91e63; /* Pink health bar for Ronaldo */
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 1;
+            }
+        }
+
+        .team-container {
+            display: flex;
+            margin-bottom: 20px; /* Add spacing between team container and player container */
+        }
+
+        .team-ronaldo, .team-messi {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px; /* Add some space below the team name */
+            margin-right: 110px; /* Increase spacing between team names */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for fancy effect */
+        }
+
+        .team-messi {
+            margin-right: 20px; /* Adjust spacing */
+        }
+
+        .additional-image {
+            width: 300px; /* Adjust the width of the additional image */
+            margin-top: 20px; /* Add spacing between the team container and the image */
+        }
+    </style>
+</head>
+<body>
+    <div class="football-pitch" id="footballPitch">
+
+        <div class="player-container">
+            <!-- Ronaldo's player image -->
+            <div class="player" style="background-image: url('ronaldo.gif');">
+                <div class="popup" id="ronaldoPopup"></div>
+            </div>
+            <!-- Messi's player image -->
+            <div class="player" style="background-image: url('messi.gif');">
+                <div class="popup" id="messiPopup"></div>
+            </div>
+        </div>
+
+        <div class="player-container">
+            <!-- Ronaldo's health bar -->
+            <div class="health-bar">
+                <div class="health-fill" id="healthFill">
+                    <span id="healthValue">100%</span>
+                </div>
+            </div>
+            <!-- Messi's health bar -->
+            <div class="health-bar">
+                <div class="health-fill" id="healthFill2">
+                    <span id="healthValue2">100%</span>
+                </div>
+            </div>
+        </div>
+        <div class="team-container">
+            <div class="team-ronaldo">TEAM 1</div>
+            <div class="team-messi">TEAM 2</div>
+        </div>
+        <img src="gifts.gif" alt="Additional Image" class="additional-image">
+    </div>
+    <script>
+        const backgroundImages = [
+            'football.jpg',
+            'football2.jpg',
+            'football3.jpg',
+            'football4.png',
+            'football5.png',
+            'football6.png',
+            'football7.png',
+            // Add more image URLs as needed
+        ];
+
+        // Initialize index for cycling through images
+        let currentImageIndex = 0;
+
+        // Function to change the background image
+        function changeBackgroundImage() {
+            const footballPitch = document.getElementById("footballPitch");
+            footballPitch.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+
+            // Increment the index, or reset it to 0 when reaching the end of the array
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+        }
+
+        // Initial background image
+        changeBackgroundImage();
+
+        // Change the background image every 5 seconds
+        setInterval(changeBackgroundImage, 5000);
+       // Function to update Ronaldo's health value on the page
+
+       //ronaldo images
+
+       const ronaldoImages = [
+    'ronaldo.gif',
+    'ronaldo2.png',
+    'ronaldo3.png',
+    'ronaldo4.png',
+    // Add more Ronaldo image URLs as needed
+];
+
+// Initialize index for cycling through Ronaldo images
+let currentRonaldoImageIndex = 0;
+
+// Function to change Ronaldo's image
+function changeRonaldoImage() {
+    const ronaldoPlayer = document.querySelector('.player:nth-child(1)'); // Select the first player container (Ronaldo)
+    ronaldoPlayer.style.backgroundImage = `url('${ronaldoImages[currentRonaldoImageIndex]}')`;
+
+    // Increment the index, or reset it to 0 when reaching the end of the array
+    currentRonaldoImageIndex = (currentRonaldoImageIndex + 1) % ronaldoImages.length;
+}
+
+// Initial Ronaldo image
+changeRonaldoImage();
+
+// Change Ronaldo's image every 5 seconds
+setInterval(changeRonaldoImage, 5000); // 5000 milliseconds = 5 seconds
+
+
+
+// messi images
+
+const messiImages = [
+    'messi.gif',
+    'messi2.png',
+    'messi3.png',
+    'messi4.png',
+    // Add more Messi image URLs as needed
+];
+
+// Initialize index for cycling through Messi images
+let currentMessiImageIndex = 0;
+
+// Function to change Messi's image
+function changeMessiImage() {
+    const messiPlayer = document.querySelector('.player:nth-child(2)'); // Select the second player container (Messi)
+    messiPlayer.style.backgroundImage = `url('${messiImages[currentMessiImageIndex]}')`;
+
+    // Increment the index, or reset it to 0 when reaching the end of the array
+    currentMessiImageIndex = (currentMessiImageIndex + 1) % messiImages.length;
+}
+
+// Initial Messi image
+changeMessiImage();
+
+// Change Messi's image every 5 seconds
+setInterval(changeMessiImage, 5000); // 5000 milliseconds = 5 seconds
+
+function updateHealth(health, player, prevHealth) {
+    const healthValueSpan = document.getElementById("healthValue");
+    const popup = document.getElementById(player + "Popup");
+
+    // Calculate the health change value
+    const healthChange = health - prevHealth;
+
+    // Update the health value text (including values greater than 100%)
+    healthValueSpan.textContent = health + "%";
+
+    // Show the popup with the appropriate message
+    const message = healthChange >= 0 ? `+${healthChange}` : `${healthChange}`;
+    popup.textContent = message;
+    popup.style.animation = "none"; // Reset the animation
+    setTimeout(() => {
+        popup.style.animation = "fadeInOut 3s linear"; // Reapply the animation
+    }, 10); // Delay to allow resetting the animation
+
+    // Check if the value is greater than 100%, and if so, don't update the health bar width
+    if (health <= 100) {
+        const healthFill = document.getElementById("healthFill");
+        healthFill.style.width = health + "%";
+    } else {
+        const healthFill = document.getElementById("healthFill");
+        healthFill.style.width = "100%";
+    }
+}
+
+// Function to update Messi's health value on the page
+function updateHealthMessi(health, prevHealth) {
+    const healthValue2Span = document.getElementById("healthValue2");
+    const popup = document.getElementById("messiPopup");
+
+    // Calculate the health change value
+    const healthChange = health - prevHealth;
+
+    // Update the health value text (including values greater than 100%)
+    healthValue2Span.textContent = health + "%";
+
+    // Show the popup with the appropriate message
+    const message = healthChange >= 0 ? `+${healthChange}` : `${healthChange}`;
+    popup.textContent = message;
+    popup.style.animation = "none"; // Reset the animation
+    setTimeout(() => {
+        popup.style.animation = "fadeInOut 3s linear"; // Reapply the animation
+    }, 10); // Delay to allow resetting the animation
+
+    // Check if the value is greater than 100%, and if so, don't update the health bar width
+    if (health <= 100) {
+        const healthFill = document.getElementById("healthFill2");
+        healthFill.style.width = health + "%";
+    } else {
+        const healthFill = document.getElementById("healthFill2");
+        healthFill.style.width = "100%";
+    }
+}
+
+
+        // Initialize the previous health values
+        let prevRonaldoHealth = 100;
+        let prevMessiHealth = 100;
+
+        // WebSocket connection to your Node.js server
+        const socket = new WebSocket("ws://localhost:3000");
+
+        // Handle messages from the server
+        socket.addEventListener("message", (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === "healthUpdate") {
+                const ronaldoHealth = data.ronaldoHealth;
+                const messiHealth = data.messiHealth;
+                updateHealth(ronaldoHealth, "ronaldo", prevRonaldoHealth);
+                updateHealthMessi(messiHealth, prevMessiHealth);
+
+                // Update the previous health values
+                prevRonaldoHealth = ronaldoHealth;
+                prevMessiHealth = messiHealth;
+            }
+        });
+    </script>
+</body>
+</html>
