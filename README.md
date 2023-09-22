@@ -34,6 +34,16 @@ To set up and run this interactive game for your TikTok livestream, follow these
 
 6. Share your livestream link with your audience and let the battle begin!
 
+## Showcase
+![Ronaldo vs. Messi Showcase](public/previewImage2.png)
+
+*Caption: A screenshot showcasing the Ronaldo vs. Messi game in action during a TikTok livestream.*
+
+## Health Change Animation
+![Health Change Animation](public/previewImage1.png)
+
+*Caption: An animated GIF demonstrating how player health changes dynamically based on viewer interactions.*
+
 ## Contributions
 Contributions are welcome! If you have ideas for improvements or new features, feel free to open an issue or submit a pull request.
 
